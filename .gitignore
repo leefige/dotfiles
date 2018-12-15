@@ -7,6 +7,7 @@
 
 !.vim
 !.vim/**
+.vim/bundle/**
 
 !.config
 !.config/**
