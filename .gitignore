@@ -1,0 +1,15 @@
+# Ignore everything
+*
+# But not these files...
+!.gitignore
+!.bashrc
+!.vimrc
+
+!.vim
+!.vim/**
+
+!.config
+!.config/**
+# Ignore the installed plugins
+.vim/plugged/**
+
