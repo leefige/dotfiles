@@ -1,20 +1,12 @@
-" basic setting
 " set POSIX shell
 if &shell =~# 'fish$'
-    set shell=sh
+    set shell=bash
 endif
 
-set nu          " line number
-set ts=4        " tab
-set expandtab
-set autoindent
-syntax enable
-
-" save when forgetting to sudo vim
-cmap w!! w !sudo tee > /dev/null %
+set backspace=indent,eol,start
 
 " Vundle setting
-set nocompatible              " be iMproved, required
+"set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
@@ -30,7 +22,18 @@ Plugin 'VundleVim/Vundle.vim'
 
 " vim-fish
 Plugin 'dag/vim-fish'
-
+Plugin 'airblade/vim-gitgutter'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'itchyny/lightline.vim'
+Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf.vim'
+"Plugin 'mattn/emmet-vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'tpope/vim-eunuch'
+Plugin 'tpope/vim-surround'
+Plugin 'w0rp/ale'
+Plugin 'Valloric/YouCompleteMe'
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
@@ -65,6 +68,97 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+
+" YCM
+let g:ycm_server_python_interpreter='/usr/bin/python'
+"let g:ycm_global_ycm_extra_conf='~/.vim/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+
+" lightlines
+set laststatus=2
+if !has('gui_running')
+  set t_Co=256
+endif
+set noshowmode
+let g:lightline = {
+      \ 'colorscheme': 'powerline',
+      \ }
+
+" nerd tree
+map <C-o> :NERDTreeToggle<CR>
+
+"color scheme
+colorscheme desert
+
+" ale
+let g:ale_sign_column_always = 1
+let g:ale_completion_delay = 500
+let g:ale_echo_delay = 20
+let g:ale_lint_delay = 500
+let g:ale_echo_msg_format = '[%linter%] %code: %%s'
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_lint_on_insert_leave = 1
+let g:airline#extensions#ale#enabled = 1
+"let g:ale_set_quickfix = 1
+"let g:ale_open_list = 1"打开quitfix对话框
+
+let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
+let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
+let g:ale_c_cppcheck_options = ''
+let g:ale_cpp_cppcheck_options = ''
+
+let g:ale_sign_error = ">>"
+let g:ale_sign_warning = "--"
+map <F7> ::ALEToggle<CR>
+
+" update .vimrc dynamically
+autocmd BufWritePost $MYVIMRC source $MYVIMRC
+set nu          " line number
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+syntax enable
+
+" search setting
+set incsearch
+set ignorecase
+set wildmenu
+
+" <leader>
+let mapleader=";"
+
+" short cuts
+" line begin/end
+nmap LB 0
+nmap LE $
+" copy to system clipboard
+vnoremap <Leader>y "+y
+" paste from clipboard
+nmap <Leader>p "+p
+" close split window
+"nmap <Leader>q :q<CR>
+" save current window
+"nmap <Leader>w :w<CR>
+" save all and quit
+"nmap <Leader>WQ :wa<CR>:q<CR>
+" quit without saving
+"nmap <Leader>Q :qa!<CR>
+" go to next window
+nnoremap nw <C-W><C-W>
+" go to right window
+nnoremap <Leader>lw <C-W>l
+" go to left window
+nnoremap <Leader>hw <C-W>h
+" go to window above
+nnoremap <Leader>kw <C-W>k
+" go to window below
+nnoremap <Leader>jw <C-W>j
+" 定义快捷键在结对符之间跳转
+nmap <Leader>M %
+
+" save when forgetting to sudo vim
+cmap w!! w !sudo tee > /dev/null %
 
 " cscope
 if filereadable("cscope.out")
