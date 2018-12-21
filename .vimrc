@@ -42,6 +42,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'rhysd/vim-llvm'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'luochen1990/rainbow'
+Plugin 'PangPangPangPangPang/vim-terminal'
 " plugin from http://vim-scripts.org/vim/scripts.html
 " Plugin 'L9'
 " Git plugin not hosted on GitHub
@@ -74,8 +75,13 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 " auto pair
-let g:AutoPairsFlyMode = 1
+let g:AutoPairsFlyMode = 0
 let g:AutoPairsShortcutBackInsert = '<M-b>'
+
+" terminal 
+let g:vs_terminal_custom_pos = 'bottom'
+let g:vs_terminal_custom_command = '/usr/bin/fish'
+nnoremap <F9> :VSTerminalToggle<CR>
 
 " YCM
 let g:ycm_server_python_interpreter='/usr/bin/python'
